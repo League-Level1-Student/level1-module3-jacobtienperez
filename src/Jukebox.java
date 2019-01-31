@@ -25,12 +25,20 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
  * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 
 public class Jukebox implements Runnable, MouseListener {
+	JLabel label1;
+	JLabel label2;
+	JLabel label3;
+	JLabel label4;
+	Song mysong;
+	
+
 	
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Jukebox());
 		Jukebox jukebox = new Jukebox();
 		jukebox.createUI();
+		
 	}
 	
 	public void createUI() {
@@ -39,11 +47,18 @@ public class Jukebox implements Runnable, MouseListener {
 		frame.setVisible(true);
 		JPanel pan = new JPanel();
 		frame.add(pan);
-		JLabel label =  loadImage("kiddo.png");
-		label.addMouseListener(null);
-		JLabel label2 = loadImage("d2.png");
-		label2.addMouseListener(null);
-		frame.add(label);
+	 label1 =  loadImage("kiddo.png");
+		label1.addMouseListener(this);
+		pan.add(label1);
+		 label2 = loadImage("d2.png");
+		label2.addMouseListener(this);
+		  pan.add(label2);
+		 label3 = loadImage("boku400.png");
+		label3.addMouseListener(this);
+		pan.add(label3);
+	 label4 = loadImage("miss.jpg");
+		label4.addMouseListener(this);
+		pan.add(label4);
 		frame.pack();
 		
 		
@@ -58,17 +73,11 @@ public class Jukebox implements Runnable, MouseListener {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
-          Song des = new Song("despacito.mp3");
-          Song bnha = new Song("peace.mp3");
-          Song miss = new Song("hit.mp3");
-          Song splat = new Song("blush.mp3");
+	
           
 
 		// 5. Play the Song
-         des.play();
-         bnha.play();
-         miss.play(); 
-         splat.play();
+        
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -89,7 +98,30 @@ public class Jukebox implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(mysong!=(null)) {
+			mysong.stop();
+		}
+			
+	if(arg0.getSource().equals(label1)) {
+		 mysong = new Song("blush.mp3");
+		mysong.play();
+		System.out.println();
+			
+		}
+	if(arg0.getSource().equals(label2)) {
+		 mysong = new Song("despacito.mp3");
+		mysong.play();
+		}
+	if(arg0.getSource().equals(label3)) {
+		 mysong = new Song("peace.mp3");
+		mysong.play();
+	}
+	if(arg0.getSource().equals(label4)) {
+		 mysong = new Song("hit.mp3");
+		mysong.play();
+		System.out.println();
+	}
+			
 	}
 
 	@Override
